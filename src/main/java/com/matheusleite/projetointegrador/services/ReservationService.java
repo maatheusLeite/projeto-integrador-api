@@ -27,6 +27,7 @@ public class ReservationService implements Serializable {
 	}
 	
 	public Reservation insert(Reservation obj) {
+		obj.setId(null);
 		return repository.save(obj);
 	}
 	
