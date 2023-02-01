@@ -56,5 +56,4 @@ public class UserResource {
 		service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
-	
 }
