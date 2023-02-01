@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +22,12 @@ public class Reservation implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant generationMoment;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	private Instant bookedDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
@@ -29,10 +36,11 @@ public class Reservation implements Serializable  {
 	public Reservation() {
 	}
 
-	public Reservation(Long id, Instant generationMoment, User client) {
+	public Reservation(Long id, Instant generationMoment, Instant bookedDate,User client) {
 		super();
 		this.id = id;
 		this.generationMoment = generationMoment;
+		this.bookedDate = bookedDate;
 		this.client = client;
 	}
 
@@ -50,6 +58,14 @@ public class Reservation implements Serializable  {
 
 	public void setGenerationMoment(Instant generationMoment) {
 		this.generationMoment = generationMoment;
+	}
+
+	public Instant getBookedDate() {
+		return bookedDate;
+	}
+
+	public void setBookedDate(Instant bookedDate) {
+		this.bookedDate = bookedDate;
 	}
 
 	public User getClient() {

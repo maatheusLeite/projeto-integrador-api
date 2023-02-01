@@ -7,22 +7,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.matheusleite.projetointegrador.entities.User;
-import com.matheusleite.projetointegrador.repositories.UserRepository;
+import com.matheusleite.projetointegrador.entities.Reservation;
+import com.matheusleite.projetointegrador.repositories.ReservationRepository;
 
 @Service
-public class UserService implements Serializable {
+public class ReservationService implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	UserRepository repository;
+	ReservationRepository repository;
 
-	public List<User> findAll() {
+	public List<Reservation> findAll() {
 		return repository.findAll();
 	}
 
-	public User findById(Long id) {
-		Optional<User> obj = repository.findById(id);
+	public Reservation findById(Long id) {
+		Optional<Reservation> obj = repository.findById(id);
 		return obj.get();
 	}
 }
