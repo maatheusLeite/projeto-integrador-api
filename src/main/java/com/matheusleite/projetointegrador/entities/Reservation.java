@@ -2,7 +2,9 @@ package com.matheusleite.projetointegrador.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,6 +35,9 @@ public class Reservation implements Serializable  {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
+	
+	@OneToMany(mappedBy = "reservation")
+	private Set<RestaurantTable> restaurantTables = new HashSet<>();
 	
 	public Reservation() {
 	}
@@ -74,6 +80,10 @@ public class Reservation implements Serializable  {
 
 	public void setClient(User client) {
 		this.client = client;
+	}
+
+	public Set<RestaurantTable> getRestaurantTables() {
+		return restaurantTables;
 	}
 
 	@Override

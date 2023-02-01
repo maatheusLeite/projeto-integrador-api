@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.matheusleite.projetointegrador.entities.Reservation;
+import com.matheusleite.projetointegrador.entities.RestaurantTable;
 import com.matheusleite.projetointegrador.entities.User;
 import com.matheusleite.projetointegrador.repositories.ReservationRepository;
+import com.matheusleite.projetointegrador.repositories.RestaurantTableRepository;
 import com.matheusleite.projetointegrador.repositories.UserRepository;
 
 @Configuration
@@ -22,6 +24,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ReservationRepository reservationRepository;
+	
+	@Autowired 
+	private RestaurantTableRepository restaurantTableRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -37,6 +42,12 @@ public class TestConfig implements CommandLineRunner {
 		Reservation r2 = new Reservation(null, Instant.parse("2022-06-25T08:03:01Z"), Instant.parse("2022-06-25T18:00:00Z"), u4);
 		
 		reservationRepository.saveAll(Arrays.asList(r1, r2));
+		
+		RestaurantTable t1 = new RestaurantTable(null, 4, r1);
+		RestaurantTable t3 = new RestaurantTable(null, 4, r2);
+		RestaurantTable t4 = new RestaurantTable(null, 4, r2);
+		
+		restaurantTableRepository.saveAll(Arrays.asList(t1, t3, t4));
 	}
 
 }
