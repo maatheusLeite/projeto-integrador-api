@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,18 +25,21 @@ public class ReservationResource {
 	@Autowired
 	private ReservationService service;
 
+	@CrossOrigin()
 	@GetMapping
 	public ResponseEntity<List<Reservation>> findAll() {
 		List<Reservation> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@CrossOrigin()
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Reservation> findById(@PathVariable Long id) {
 		Reservation obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@CrossOrigin()
 	@PostMapping
 	public ResponseEntity<Reservation> insert(@RequestBody Reservation obj) {
 		obj = service.insert(obj);
@@ -44,6 +48,7 @@ public class ReservationResource {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
+	@CrossOrigin()
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
